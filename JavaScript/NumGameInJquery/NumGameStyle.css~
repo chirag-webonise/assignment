@@ -1,0 +1,51 @@
+#main
+{
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width:360px;
+    height:360px;
+    border:3px grey solid;
+}
+
+#main div
+{
+    color:grey;
+    font-size: 60px;
+    font-family: cursive;
+    display:block;
+    float:left;
+    width:100px;
+    height:100px;
+    border:2px #99ff33 solid;
+    background-color: white;
+    margin-top: 12px;
+    margin-left: 10px;
+    margin-right: 5px;
+    
+}
+
+.wrap
+{
+	  
+          text-align:center;
+}
+
+.button
+{
+
+          position : relative;
+          top : 50px;
+          background-color:#99ff33;
+          font: 20px cursive;
+          color: grey;
+}
+
+#colors
+{
+          font-family: cursive;
+          font-size: 24px;
+          position : relative;
+          top : 50px;
+          color: grey;
+}

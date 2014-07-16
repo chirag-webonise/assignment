@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link rel="stylesheet" href="style.css" type="text/css"/>
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<canvas class="div" id="graph" width="1000" height="600" style="border:2px solid grey;"></canvas>
+
+<form class="form">
+<br>
+Equation: <input type="text" id="equation" name="Equation"><br><br>
+From	: <input type="text" id="from" name="From"><br><br>
+To	: <input type="text" id="to" name="To"><br><br>
+Steps	: <input type="text" id="steps" name="Steps"><br><br>
+<input type = "button" id="draw" value="Draw" onclick="drawIt()">
+<input type = "button" id="reset" value="Reset">
+</form> 
+
+</body>
+
+</html>
+
