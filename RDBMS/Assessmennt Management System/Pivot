@@ -1,0 +1,43 @@
+
+
+
+create view v_pvt1 (
+select v.USER_NAME, 
+case when v.ASSESSMENT_NAME = "math" then v.SCORE end as Maths, 
+case when v.ASSESSMENT_NAME = "GK" then v.SCORE end as GK, 
+case when v.ASSESSMENT_NAME = "computer" then v.SCORE end as Computer 
+from v_scorecard as v
+);
+
+mysql> select * from v_pvt1;
++-----------+-------+------+----------+
+| USER_NAME | Maths | GK   | Computer |
++-----------+-------+------+----------+
+| aman      |  NULL | NULL |        2 |
+| aman      |  NULL |    1 |     NULL |
+| aman      |     1 | NULL |     NULL |
+| vimal     |  NULL | NULL |        4 |
+| vimal     |  NULL |    1 |     NULL |
+| vimal     |     2 | NULL |     NULL |
++-----------+-------+------+----------+
+
+
+
+create view v_pvt2 as ( 
+select USER_NAME, 
+sum(Maths) as MATHS, 
+sum(GK) as GK, 
+sum(Computer) as COMPUTER 
+from v_pvt 
+group by USER_NAME
+);
+
+mysql> select * from v_pvt2;
++-----------+-------+------+----------+
+| USER_NAME | MATHS | GK   | COMPUTER |
++-----------+-------+------+----------+
+| aman      |     1 |    1 |        2 |
+| vimal     |     2 |    1 |        4 |
++-----------+-------+------+----------+
+
+___________________________________________________

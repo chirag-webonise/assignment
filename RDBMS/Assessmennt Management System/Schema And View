@@ -1,0 +1,136 @@
+///sql queries for creating schema
+
+
+mysql> create database Assess;
+
+mysql> use Assess;
+
+mysql> show tables;
+
+mysql> create table user(id int(2) primary key,name varchar(40));
+
+mysql> create table assessment(id int(2) primary key,name varchar(40));
+
+mysql> create table question(id int(2) primary key,que varchar(400));
+
+mysql> create table assess_que(aid int(2),qid int(2), primary key(aid,qid),foreign key(aid) references assessment(id) on delete cascade,foreign key(qid) references question(id) on delete cascade);
+
+mysql> create table que_options(qid int(2),options varchar(100),status bit(0), primary key(qid,options),foreign key(qid) references question(id) on delete cascade);
+
+mysql> create table user_ans(uid int(2),qid int(2),ans varchar(100),primary key(uid,qid,ans),foreign key(uid) references user(id) on delete cascade,foreign key(qid) references question(id) on delete cascade);
+
+
+
+
+/// Tables
+
+mysql> select * from user;
++----+--------+
+| id | name   |
++----+--------+
+|  1 | aman   |
+|  2 | vimal  |
+|  3 | anvay  |
+|  4 | suresh |
++----+--------+
+
+
+mysql> select * from assessment;
++----+----------+
+| id | name     |
++----+----------+
+|  1 | math     |
+|  2 | GK       |
+|  3 | computer |
++----+----------+
+
+
+mysql> select * from question;
++----+------------------------------------+
+| id | que                                |
++----+------------------------------------+
+|  1 | 5+2=                               |
+|  2 | 4/2=                               |
+|  3 | device(s) that stores data:        |
+|  4 | first batsman to score 200 in ODIs |
+|  5 | main memory for computer           |
++----+------------------------------------+
+
+
+mysql> select * from que_options;
++-----+------------------+--------+
+| qid | options          | status |
++-----+------------------+--------+
+|   1 | 1                |        |
+|   1 | 3                |        |
+|   1 | 7                |     |
+|   1 | 9                |        |
+|   2 | 2                |     |
+|   2 | 3                |        |
+|   2 | 4                |        |
+|   2 | 9                |        |
+|   3 | CD               |     |
+|   3 | pen drive        |     |
+|   3 | printer          |        |
+|   3 | RAM              |     |
+|   4 | rohit sharma     |        |
+|   4 | sachin tendulkar |     |
+|   4 | suresh raina     |        |
+|   4 | virendar sehwag  |        |
+|   5 | hard disk        |        |
+|   5 | RAM              |     |
++-----+------------------+--------+
+
+
+mysql> select * from assess_que;
++-----+-----+
+| aid | qid |
++-----+-----+
+|   1 |   1 |
+|   1 |   2 |
+|   3 |   3 |
+|   2 |   4 |
+|   3 |   5 |
++-----+-----+
+
+
+mysql> select * from user_ans;
++-----+-----+------------------+
+| uid | qid | ans              |
++-----+-----+------------------+
+|   1 |   1 | 7                |
+|   2 |   1 | 7                |
+|   1 |   2 | 0                |
+|   2 |   2 | 2                |
+|   1 |   3 | pen drive        |
+|   1 |   3 | RAM              |
+|   1 |   3 | register         |
+|   2 |   3 | CD               |
+|   2 |   3 | pen drive        |
+|   2 |   3 | RAM              |
+|   2 |   3 | register         |
+|   1 |   4 | sachin tendulkar |
+|   2 |   4 | sachin tendulkar |
+|   2 |   5 | RAM              |
++-----+-----+------------------+
+
+
+
+/// view to display scores of user 
+
+create view v_scoreboard as (select U.id as USER_ID,U.name as USER_NAME,A.name as ASSESSMENT_NAME,count(U.name) as SCORE from user as U inner join que_options as QO inner join assessment as A inner join user_ans as UA inner join assess_que as AQ inner join question as Q where (Q.id=UA.qid) and (U.id = UA.uid) and (QO.qid = UA.qid) and (UA.ans=QO.options) and (QO.status=1) and (A.id=AQ.aid) and (AQ.qid=QO.qid) group by U.name, A.name); 
+
+mysql> select * from v_scoreboard;
++---------+-----------+-----------------+-------+
+| USER_ID | USER_NAME | ASSESSMENT_NAME | SCORE |
++---------+-----------+-----------------+-------+
+|       1 | aman      | computer        |     2 |
+|       1 | aman      | GK              |     1 |
+|       1 | aman      | math            |     1 |
+|       2 | vimal     | computer        |     4 |
+|       2 | vimal     | GK              |     1 |
+|       2 | vimal     | math            |     2 |
++---------+-----------+-----------------+-------+
+6 rows in set (0.00 sec)
+
+
