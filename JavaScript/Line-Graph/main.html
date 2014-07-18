@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link rel="stylesheet" href="style.css" type="text/css"/>
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<canvas class="div" id="graph" width="1000" height="600" style="border:2px solid grey;"></canvas>
+
+<form id="myform"class="form">
+<br>
+&nbsp;&nbsp; Equation[y=mx+c]   : <input type="text" class="formfields" id="equation" name="Equation"><br><br><br>
+&nbsp;&nbsp; From	: <input type="number" class="formfields" id="from" name="From"><br><br>
+&nbsp;&nbsp; To         :<input type="number" class="formfields" id="to" name="To"><br><br>
+&nbsp;&nbsp; Steps	: <input type="number" class="formfields" id="steps" name="Steps"><br><br>
+<input type = "button" id="draw" value="Draw" onclick="drawIt();">
+<input type = "reset" id="reset" value="Reset" onclick="resetIt();">
+</form> 
+
+</body>
+
+</html>
+
