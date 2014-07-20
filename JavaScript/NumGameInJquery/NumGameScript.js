@@ -1,6 +1,10 @@
-$(new Document).ready(function()
+
+$(document).ready(function()
 
 {
+    $("#r1").removeAttr("checked");
+    $("#r2").removeAttr("checked");
+    $("#r3").removeAttr("checked");
  
     $('.d').hover(function()                                                            // to show on which number mouse is over and then creating an effect
     { 
@@ -11,24 +15,33 @@ $(new Document).ready(function()
         $(this).css("border-color","#99ff33");
     });
  
-
-    $("#colordiv input:radio[name=color]").click(function()                             // takes the color in global variable radio_color so that the selected color
+    $("#colordiv input:radio[name=color]").click(function()                             // takes the color in global variable radio_color so that the selectedcolor
     {
         radio_color = $(this).val();							// can be used by colouring function.
     });
-    
+  
 
-    $('.d').click(function()                                                             //colors the seleted number with selected color.
+    $('.d').click(function()                                                            //colors the seleted number with selected color.
     {
         var c2 = $(this).css("background-color"); 
         if(c2==="rgb(255, 255, 255)")
-            { 
+        { 
               $(this).css("background-color",radio_color);
-              $(this).css("color","white");
-            }
+              $(this).css("color","grey");
+        }
         else
-            alert("Coloring is done Already");
-    });
+        { 
+	    c2 = $(this).css("background-color"); 
+	    var color;
+	    if(c2==="rgb(255, 0, 0)")	
+		color = "red";
+	    if(c2==="rgb(0, 128, 0)")	
+		color = "green";
+	    if(c2==="rgb(0, 0, 255)")	
+		color = "blue";	    
+            alert("It is Already "+color+" colored !!");
+	}   
+ });
 
 
     $('#reset').click(function()                                                       //this function is resetting the game to its original state.
@@ -36,7 +49,6 @@ $(new Document).ready(function()
        $("#r1").removeAttr("checked");
        $("#r2").removeAttr("checked");
        $("#r3").removeAttr("checked");
-       
        $(".d").css("background-color","white");
        $(".d").css("color","grey");
        
@@ -48,22 +60,23 @@ $(new Document).ready(function()
                 $(this).text(x++);
             }
        });
+      
+       radio_color ="rgb(255, 255, 255)";
        
     });
 
 
     $.fn.shuffle = function() {							//this is shuffling logic which is called on the suffle button's click event.
- 
         var allElems = this.get(),
-            getRandom = function(max) {
+        getRandom = function(max) {
             return Math.floor(Math.random() * max);
-            },
-            shuffled = $.map(allElems, function(){
-                var random = getRandom(allElems.length),
-                randEl = $(allElems[random]).clone(true)[0];
-                allElems.splice(random, 1);
-                return randEl;
-           });
+        },
+        shuffled = $.map(allElems, function(){
+            var random = getRandom(allElems.length),
+            randEl = $(allElems[random]).clone(true)[0];
+            allElems.splice(random, 1);
+            return randEl;
+        });
  
         this.each(function(i){
             $(this).replaceWith($(shuffled[i]));
