@@ -8,13 +8,16 @@ MongoDB is an open-source, document oriented, NoSQL database.
 It is written in c++, hence it is very fast.
 It uses JSON-style documents to enpower dynamic schemas, hence here databases are schema less.
 MongoDB works on concept of collections and documents.
-Searching is ver fast since it supports search by field, range queries, regular expression searches.
+Searching is very fast since it supports search by field, range queries, regular expression searches.
 
 (Part 2) 
 
-	Instead of following ACID property like RDBMS it follows BASE Property : 
+Instead of following ACID property like RDBMS it follows BASE Property : 
 
-	Basically Available: This constraint states that the system guaranties the availability of 	the data.It focuses on availability of data even in the presence of multiple failures. It achieves this by using a highly distributed approach to database management. NoSQL databases spread data across many storage systems with a high degree of replication.
+Basically Available: This constraint states that the system guaranties the availability of the data.
+		     It focuses on availability of data even in the presence of multiple failures. 
+		     It achieves this by using a highly distributed approach to database management. 
+		     NoSQL databases spread data across many storage systems with a high degree of replication.
 
 Soft state: The state of the system could change over time, so even during times without input there may be changes going on due to ‘eventual consistency,’ thus the state of the system is always ‘soft.’ 
 
